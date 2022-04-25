@@ -30,6 +30,11 @@ public class MarkdownParse {
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             //change currentIndex to start at closeParen
             currentIndex = closeParen + 1;
+            
+            
+            
+            
+            
         }
         //return what is inside in the parenthesis
         return toReturn;
