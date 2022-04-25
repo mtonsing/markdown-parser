@@ -13,6 +13,8 @@ public class MarkdownParse {
         //start at index 0
         int currentIndex = 0;
         //makesure index doesn't go out of bound
+        //if markdown doesn't contain any brackets 
+        //will conduct a while loop to find just parenthesis.
         while(currentIndex < markdown.length()) {
             //get the index of first openBracket
             int openBracket = markdown.indexOf("[", currentIndex);
@@ -28,7 +30,6 @@ public class MarkdownParse {
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             //change currentIndex to start at closeParen
             currentIndex = closeParen + 1;
-            //System.out.println(currentIndex);
         }
         //return what is inside in the parenthesis
         return toReturn;
