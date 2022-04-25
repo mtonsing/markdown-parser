@@ -32,8 +32,24 @@ public class MarkdownParse {
                 }
  
             }
- 
-                //get the index of first openBracket
+            if(markdown.indexOf("[")==-1){
+                //so there is only parenthesis and no brackets
+                int openparen = markdown.indexOf("(", currentIndex);
+                int closeparen = markdown.indexOf(")", openparen);
+                int startFile = markdown.indexOf("(", closeparen);
+                int EndFile = markdown.indexOf(")", startFile);
+                toReturn.add(markdown.substring(startFile + 1, EndFile));
+                //change currentIndex to start at closeParen
+                if(markdown.indexOf("(",EndFile)==-1){
+                    break;
+                }
+                else{
+                    currentIndex = EndFile + 1;
+                }
+               
+            }
+            else{
+            //get the index of first openBracket
             int openBracket = markdown.indexOf("[", currentIndex);
             //get the index of last openbracket and start 
             //to find another openbracket
@@ -50,6 +66,8 @@ public class MarkdownParse {
             else{
                 currentIndex = closeParen + 1;
             }
+
+            } 
             
              
         }
