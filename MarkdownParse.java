@@ -16,6 +16,23 @@ public class MarkdownParse {
         //if markdown doesn't contain any brackets 
         //will conduct a while loop to find just parenthesis.
         while(currentIndex < markdown.length()) {
+            if(markdown.indexOf("(")==-1){
+                //so there is only brackets
+                int openBracket = markdown.indexOf("[", currentIndex);
+                int closeBracket = markdown.indexOf("]", openBracket);
+                int startFile = markdown.indexOf("[", closeBracket);
+                int EndFile = markdown.indexOf("]", startFile);
+                toReturn.add(markdown.substring(startFile + 1, EndFile));
+                //change currentIndex to start at closeParen
+                if(markdown.indexOf("(",EndFile)==-1){
+                    break;
+                }
+                else{
+                    currentIndex = EndFile + 1;
+                }
+ 
+            }
+ 
                 //get the index of first openBracket
             int openBracket = markdown.indexOf("[", currentIndex);
             //get the index of last openbracket and start 
