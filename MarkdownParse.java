@@ -24,35 +24,49 @@ public class MarkdownParse {
                 int EndFile = markdown.indexOf("]", startFile);
                 toReturn.add(markdown.substring(startFile + 1, EndFile));
                 //change currentIndex to start at closeParen
-                currentIndex = EndFile + 1;
+                if(markdown.indexOf("(",EndFile)==-1){
+                    break;
+                }
+                else{
+                    currentIndex = EndFile + 1;
+                }
+            }
+            if(markdown.indexOf("[")==-1){
+                //so there is only parenthesis and no brackets
+                int openparen = markdown.indexOf("(", currentIndex);
+                int closeparen = markdown.indexOf(")", openparen);
+                int startFile = markdown.indexOf("(", closeparen);
+                int EndFile = markdown.indexOf(")", startFile);
+                toReturn.add(markdown.substring(startFile + 1, EndFile));
+                //change currentIndex to start at closeParen
+                if(markdown.indexOf("(",EndFile)==-1){
+                    break;
+                }
+                else{
+                    currentIndex = EndFile + 1;
+                }
+                
             }
             else{
                 //get the index of first openBracket
-            int openBracket = markdown.indexOf("[", currentIndex);
+                int openBracket = markdown.indexOf("[", currentIndex);
             //get the index of last openbracket and start 
             //to find another openbracket
-            int closeBracket = markdown.indexOf("]", openBracket);
+                int closeBracket = markdown.indexOf("]", openBracket);
             //look for the index of an open parenthesis and then start
             //looking for a closebracket
-            int openParen = markdown.indexOf("(", closeBracket);
+                int openParen = markdown.indexOf("(", closeBracket);
             //look for closeparen and start looking for openParen
-            int closeParen = markdown.indexOf(")", openParen);
-            //add markdown string starting from openParen to closeParen
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
+                int closeParen = markdown.indexOf(")", openParen);
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
             //change currentIndex to start at closeParen
-            if(markdown.indexOf("[",closeParen)==-1){
+                if(markdown.indexOf("[",closeParen)==-1){
                 break;
-            }
-            currentIndex = closeParen + 1;
-
-            }
- 
-            
-            
-            
-            
-            
-            
+                }
+                else{
+                    currentIndex = closeParen + 1;
+                }
+            }  
         }
         //return what is inside in the parenthesis
         return toReturn;
