@@ -1,1 +1,3 @@
-![Image](http://url/a.png)
+[Link][1]
+⋮
+[1]: http://b.org

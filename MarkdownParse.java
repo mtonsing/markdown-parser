@@ -40,6 +40,9 @@ public class MarkdownParse {
             //add markdown string starting from openParen to closeParen
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             //change currentIndex to start at closeParen
+            if(markdown.indexOf("[",closeParen)==-1){
+                break;
+            }
             currentIndex = closeParen + 1;
 
             }
