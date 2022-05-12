@@ -11,6 +11,7 @@ public class MarkdownParse {
     static int b;
     static int d;
     static int f;
+    static int r;
 
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
