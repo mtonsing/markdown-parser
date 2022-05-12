@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class MarkdownParse {
     static int age;
     static int a;
+    static int b;
+    static int d;
+    static int f;
 
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
