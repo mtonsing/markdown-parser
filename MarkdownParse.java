@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class MarkdownParse {
     static int age;
+    static int a;
 
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
