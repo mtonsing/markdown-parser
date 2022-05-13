@@ -1,4 +1,4 @@
-//https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
+
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,80 +6,64 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class MarkdownParse {
-    static int age;
-    static int a;
-    static int b;
-    static int d;
-    static int f;
-    static int r;
-
+    
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
-        //start at index 0
         int currentIndex = 0;
-        //makesure index doesn't go out of bound
-        //if markdown doesn't contain any brackets 
-        //will conduct a while loop to find just parenthesis.
+        int exclaimMark;
+        int openBracket;
+        int closeBracket;
+        int openParen;
+        int closeParen;
+        int urlDot;
         while(currentIndex < markdown.length()) {
-            if(markdown.indexOf("(")==-1){
-                //so there is only brackets
-                int openBracket = markdown.indexOf("[", currentIndex);
-                int closeBracket = markdown.indexOf("]", openBracket);
-                int startFile = markdown.indexOf("[", closeBracket);
-                int EndFile = markdown.indexOf("]", startFile);
-                toReturn.add(markdown.substring(startFile + 1, EndFile));
-                //change currentIndex to start at closeParen
-                if(markdown.indexOf("(",EndFile)==-1){
-                    break;
-                }
-                else{
-                    currentIndex = EndFile + 1;
-                }
- 
-            }
-            if(markdown.indexOf("[")==-1){
-                //so there is only parenthesis and no brackets
-                int openparen = markdown.indexOf("(", currentIndex);
-                int closeparen = markdown.indexOf(")", openparen);
-                int startFile = markdown.indexOf("(", closeparen);
-                int EndFile = markdown.indexOf(")", startFile);
-                toReturn.add(markdown.substring(startFile + 1, EndFile));
-                //change currentIndex to start at closeParen
-                if(markdown.indexOf("(",EndFile)==-1){
-                    break;
-                }
-                else{
-                    currentIndex = EndFile + 1;
-                }
-               
-            }
-            else{
-            //get the index of first openBracket
-            int openBracket = markdown.indexOf("[", currentIndex);
-            //get the index of last openbracket and start 
-            //to find another openbracket
-            int closeBracket = markdown.indexOf("]", openBracket);
-            //look for the index of an open parenthesis and then start
-            //looking for a closebracket
-            int openParen = markdown.indexOf("(", closeBracket);
-            //look for closeparen and start looking for openParen
-            int closeParen = markdown.indexOf(")", openParen);
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            if(markdown.indexOf("[",closeParen)==-1){
+
+            exclaimMark = markdown.indexOf("!", currentIndex);
+
+            openBracket = markdown.indexOf("[", currentIndex); 
+            if(exclaimMark == openBracket -1 && exclaimMark != -1){
+                System.out.println("Invalid link format exclaimMark");
                 break;
             }
-            else{
-                currentIndex = closeParen + 1;
+
+            if(openBracket == -1){
+                System.out.println("Error: Invalid link format! openBracket");
+                break;
             }
 
-            } 
+            closeBracket = markdown.indexOf("]", openBracket);
+            if(closeBracket == -1){
+                System.out.println("Error: Invalid link format! closeBracket");
+                break;
+            }
+
+            urlDot = markdown.indexOf(".", openBracket);
+
+            openParen = markdown.indexOf("(", closeBracket);
+            if(openParen == -1 || openParen!= closeBracket + 1){
+                System.out.println("Error: Invalid link format openParen!");
+                break;
+            }
+
+            closeParen = markdown.indexOf(")", openParen); 
+
+            if(!(openParen < urlDot) && !(urlDot < closeParen) || urlDot == -1){
+                System.out.println("Error: Invalid link format urlDot!");
+                break;
+            }
+            if(closeParen == -1){
+                System.out.println("Error: Invalid link format closeParen!");
+                break;
+            }
+
+            toReturn.add(markdown.substring(openParen + 1, closeParen));
+            currentIndex = closeParen + 1;
+            System.out.println(currentIndex);
+            System.out.println(markdown.length());
             
-             
         }
-        //return what is inside in the parenthesis
         return toReturn;
-        
     }
 
 
