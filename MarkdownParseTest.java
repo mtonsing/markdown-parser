@@ -19,25 +19,24 @@ public class MarkdownParseTest extends MarkdownParse {
     }
     @Test 
     public void testFile5() throws IOException{
-        List<String> testFileLinks = List.of("url.com", "google.com",
-        "google.com","ucsd.edu");
+        List<String> testFileLinks = List.of( "google.com",
+        "`google.com","ucsd.edu");
         Path testFile = Path.of("test-file1.md");
         String testFileContent = Files.readString(testFile);
         assertEquals(testFileLinks,MarkdownParse.getLinks(testFileContent));    
     }
     @Test 
     public void testFile6() throws IOException{
-        List<String> testFileLinks = List.of("a.com", "b.com",
-        "a.com","example.com");
+        List<String> testFileLinks = List.of("a.com",
+        "a.com(())","example.com");
         Path testFile = Path.of("test-file2.md");
         String testFileContent = Files.readString(testFile);
         assertEquals(testFileLinks,MarkdownParse.getLinks(testFileContent));    
     }
     @Test 
     public void testFile7() throws IOException{
-        List<String> testFileLinks = List.of("https://www.twitter.com", 
-        "https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule",
-        "github.com","https://cse.ucsd.edu/");
+        List<String> testFileLinks = List.of( 
+        "https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule");
         Path testFile = Path.of("test-file3.md");
         String testFileContent = Files.readString(testFile);
         assertEquals(testFileLinks,MarkdownParse.getLinks(testFileContent));    
