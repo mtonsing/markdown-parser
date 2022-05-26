@@ -12,7 +12,34 @@ public class MarkdownParseTest extends MarkdownParse {
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
-    } 
-
-   
-}
+    }
+    @Test
+    public void subtraction() {
+       assertEquals(3,5-2);
+    }
+    @Test 
+    public void testFile5() throws IOException{
+        List<String> testFileLinks = List.of("url.com", "google.com",
+        "google.com","ucsd.edu");
+        Path testFile = Path.of("test-file1.md");
+        String testFileContent = Files.readString(testFile);
+        assertEquals(testFileLinks,MarkdownParse.getLinks(testFileContent));    
+    }
+    @Test 
+    public void testFile6() throws IOException{
+        List<String> testFileLinks = List.of("a.com", "b.com",
+        "a.com","example.com");
+        Path testFile = Path.of("test-file2.md");
+        String testFileContent = Files.readString(testFile);
+        assertEquals(testFileLinks,MarkdownParse.getLinks(testFileContent));    
+    }
+    @Test 
+    public void testFile7() throws IOException{
+        List<String> testFileLinks = List.of("https://www.twitter.com", 
+        "https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule",
+        "github.com","https://cse.ucsd.edu/");
+        Path testFile = Path.of("test-file3.md");
+        String testFileContent = Files.readString(testFile);
+        assertEquals(testFileLinks,MarkdownParse.getLinks(testFileContent));    
+    }
+} 
